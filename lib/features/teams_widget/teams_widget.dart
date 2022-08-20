@@ -17,9 +17,7 @@ class _TeamsWidgetState extends State<TeamsWidget> {
 
   @override
   void initState() {
-    Future<void>.delayed(const Duration(seconds: 1), () {
-      _teamsBloc.add(GetTeamList());
-    });
+    _teamsBloc.add(GetTeamList());
     super.initState();
   }
 
@@ -36,6 +34,7 @@ class _TeamsWidgetState extends State<TeamsWidget> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -90,7 +89,16 @@ class _TeamsWidgetState extends State<TeamsWidget> {
   }
 
   Widget _buildLoading() {
-    return const SizedBox();
+    return SizedBox(
+      height: 180,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          CircularProgressIndicator(),
+        ],
+      ),
+    );
   }
 
   Widget _buildList(TeamsLoaded state) {
@@ -100,9 +108,7 @@ class _TeamsWidgetState extends State<TeamsWidget> {
           shrinkWrap: true,
           clipBehavior: Clip.none,
           physics: const BouncingScrollPhysics(),
-          separatorBuilder: (BuildContext context, int index) => const SizedBox(
-                width: 20,
-              ),
+          separatorBuilder: (context, index) => const SizedBox(width: 20),
           scrollDirection: Axis.horizontal,
           itemCount: state.teamModel.length + 1,
           itemBuilder: (context, position) {

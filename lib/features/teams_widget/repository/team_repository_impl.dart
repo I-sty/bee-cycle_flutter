@@ -4,7 +4,7 @@ import 'package:bee_cycle_flutter/features/teams_widget/repository/team_reposito
 class TeamRepositoryImpl extends ITeamRepository {
   @override
   Future<List<TeamModel>> getTeams() async {
-    await Future.delayed(const Duration(milliseconds: 150));
+    await Future.delayed(const Duration(milliseconds: 1500));
     return [
       const TeamModel(title: "Football Club", avatars: [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeik6d5EHLTi89m_CKLXyShylk4L92YflpJQ&usqp=CAU",
