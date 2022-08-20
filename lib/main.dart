@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Beecycle',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        backgroundColor: const Color(0xFFFAFAFA),
-        fontFamily: 'Abeezee'
+        fontFamily: 'Abeezee',
       ),
       home: const MyHomePage(title: 'Beecycle'),
     );
@@ -40,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0XFFF9F9F9),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: const <Widget>[
