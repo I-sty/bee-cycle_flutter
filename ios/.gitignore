@@ -1,7 +1,17 @@
 **/dgph
+*.xccheckout
+xcuserdata/
 *.mode1v3
-*.mode2v3
 *.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.xcscheme
+*.lock
+*.swp
+.DS_Store
+.AppleDouble
+.LSOverride
+*.mode2v3
 *.pbxuser
 *.perspectivev3
 **/*sync/
@@ -26,6 +36,19 @@ Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
+
+# Xcode Project
+**/*.xcodeproj/xcuserdata/
+**/*.xcworkspace/xcuserdata/
+**/.swiftpm/xcode/xcuserdata/
+**/*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+**/*.xcworkspace/xcshareddata/*.xccheckout
+**/*.xcworkspace/xcshareddata/*.xcscmblueprint
+**/*.playground/**/timeline.xctimeline
+.idea/
+*.xcworkspacedata
+*.xcconfig
+*.pbxproj
 
 # Exceptions to above rules.
 !default.mode1v3
