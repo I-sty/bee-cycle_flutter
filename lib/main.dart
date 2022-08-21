@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'features/bicycle_selector_widget/bicycle_selector_widget.dart';
-import 'features/teams_widget/teams_widget.dart';
+import 'features/bicycle_selector_widget/widgets/bicycle_selector_widget.dart';
+import 'features/teams_widget/widget/teams_widget.dart';
 import 'features/weather_widget/weather_widget.dart';
 import 'features/welcome_widget/welcome_widget.dart';
 

@@ -3,6 +3,7 @@ import 'package:bee_cycle_flutter/features/teams_widget/model/team_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/widgets/loading.dart';
 import 'team_card_widget.dart';
 
 class TeamsWidget extends StatefulWidget {
@@ -71,9 +72,9 @@ class _TeamsWidgetState extends State<TeamsWidget> {
               child: BlocBuilder<TeamsBloc, TeamsState>(
                 builder: (context, state) {
                   if (state is TeamsInitial) {
-                    return _buildLoading();
+                    return const LoadingIndicator(height: 180);
                   } else if (state is TeamsLoading) {
-                    return _buildLoading();
+                    return const LoadingIndicator(height: 180);
                   } else if (state is TeamsLoaded) {
                     return _buildList(state);
                   } else {
@@ -84,19 +85,6 @@ class _TeamsWidgetState extends State<TeamsWidget> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildLoading() {
-    return SizedBox(
-      height: 180,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          CircularProgressIndicator(),
-        ],
       ),
     );
   }
