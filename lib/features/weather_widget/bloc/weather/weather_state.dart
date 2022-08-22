@@ -1,23 +1,14 @@
 part of 'weather_bloc.dart';
 
-abstract class WeatherState extends Equatable {
-  const WeatherState();
+@freezed
+class WeatherState with _$WeatherState {
+  const factory WeatherState.weatherInitial() = _WeatherInitial;
 
-  @override
-  List<Object> get props => [];
+  const factory WeatherState.weatherLoading() = _WeatherLoading;
+
+  const factory WeatherState.weatherLoaded({
+    required WeatherData data,
+  }) = _WeatherLoaded;
+
+  const factory WeatherState.weatherError() = _WeatherError;
 }
-
-class WeatherInitial extends WeatherState {}
-
-class WeatherLoading extends WeatherState {}
-
-class WeatherLoaded extends WeatherState {
-  final WeatherData data;
-
-  const WeatherLoaded(this.data);
-
-  @override
-  List<Object> get props => [data];
-}
-
-class WeatherError extends WeatherState {}

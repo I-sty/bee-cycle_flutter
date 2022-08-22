@@ -18,7 +18,7 @@ class _TeamsWidgetState extends State<TeamsWidget> {
 
   @override
   void initState() {
-    _teamsBloc.add(GetTeamList());
+    _teamsBloc.add(const TeamsEvent.getTeamList());
     super.initState();
   }
 
@@ -63,25 +63,24 @@ class _TeamsWidgetState extends State<TeamsWidget> {
               ],
             ),
             const SizedBox(height: 16),
-            BlocListener<TeamsBloc, TeamsState>(
-              listener: (context, state) {
-                if (state is TeamsError) {
-                  //SnackBar
-                }
-              },
-              child: BlocBuilder<TeamsBloc, TeamsState>(
-                builder: (context, state) {
-                  if (state is TeamsInitial) {
+            BlocBuilder<TeamsBloc, TeamsState>(
+              builder: (context, state) {
+                return state.when(
+                  teamsInitial: () {
                     return const LoadingIndicator(height: 180);
-                  } else if (state is TeamsLoading) {
+                  },
+                  teamsLoading: () {
                     return const LoadingIndicator(height: 180);
-                  } else if (state is TeamsLoaded) {
-                    return _buildList(state);
-                  } else {
+                  },
+                  teamsLoaded: (teams) {
+                    return _buildList(teams);
+                  },
+                  teamsError: (message) {
+                    //TODO show a snackbar
                     return const SizedBox();
-                  }
-                },
-              ),
+                  },
+                );
+              },
             )
           ],
         ),
@@ -89,7 +88,7 @@ class _TeamsWidgetState extends State<TeamsWidget> {
     );
   }
 
-  Widget _buildList(TeamsLoaded state) {
+  Widget _buildList(List<TeamModel> teams) {
     return SizedBox(
       height: 180,
       child: ListView.separated(
@@ -98,11 +97,11 @@ class _TeamsWidgetState extends State<TeamsWidget> {
           physics: const BouncingScrollPhysics(),
           separatorBuilder: (context, index) => const SizedBox(width: 20),
           scrollDirection: Axis.horizontal,
-          itemCount: state.teamModel.length + 1,
+          itemCount: teams.length + 1,
           itemBuilder: (context, position) {
             return TeamCardWidget(
-              isLastItem: position == state.teamModel.length,
-              teamModel: _getTeamModel(state.teamModel, position),
+              isLastItem: position == teams.length,
+              teamModel: _getTeamModel(teams, position),
             );
           }),
     );

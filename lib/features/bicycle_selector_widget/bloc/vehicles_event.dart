@@ -1,10 +1,6 @@
 part of 'vehicles_bloc.dart';
 
-abstract class VehicleEvent extends Equatable {
-  const VehicleEvent();
-
-  @override
-  List<Object?> get props => [];
+@freezed
+class VehicleEvent with _$VehicleEvent {
+  const factory VehicleEvent.getVehicleList() = _GetVehicleList;
 }
-
-class GetVehicleList extends VehicleEvent {}

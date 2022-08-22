@@ -1,24 +1,16 @@
 part of 'location_bloc.dart';
 
-abstract class LocationState extends Equatable {
-  const LocationState();
+@freezed
+class LocationState with _$LocationState {
+  const factory LocationState.initial() = _LocationInitial;
 
-  @override
-  List<Object> get props => [];
-}
+  const factory LocationState.loading() = _LocationLoading;
 
-class LocationInitial extends LocationState {}
+  const factory LocationState.loaded({
+    required Position position,
+  }) = _LocationLoaded;
 
-class LocationLoading extends LocationState {}
-
-class LocationLoaded extends LocationState {
-  final Position position;
-
-  const LocationLoaded(this.position);
-}
-
-class LocationError extends LocationState {
-  final String message;
-
-  const LocationError(this.message);
+  const factory LocationState.error({
+    required String message,
+  }) = _LocationError;
 }

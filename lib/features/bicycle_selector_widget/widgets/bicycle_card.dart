@@ -39,12 +39,12 @@ class BicycleCard extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                  ),
                   child: const Icon(
                     Icons.directions,
                     color: Colors.white,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
                   ),
                 ),
               )

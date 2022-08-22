@@ -22,14 +22,14 @@ class AddNewTeam extends StatelessWidget {
               onPressed: () {
                 //TODO premium page
               },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(12),
                 primary: Colors.green,
+              ),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
               ),
             ),
           ),

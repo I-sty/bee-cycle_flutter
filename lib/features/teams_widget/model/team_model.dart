@@ -1,11 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class TeamModel extends Equatable {
-  final String title;
-  final List<String> members;
+part 'team_model.freezed.dart';
+part 'team_model.g.dart';
 
-  const TeamModel({required this.title, required this.members});
+@freezed
+class TeamModel with _$TeamModel {
+  const factory TeamModel({required String title, required List<String> members}) = _TeamModel;
 
-  @override
-  List<Object?> get props => [title, members];
+  factory TeamModel.fromJson(Map<String, Object?> json)
+  => _$TeamModelFromJson(json);
 }
