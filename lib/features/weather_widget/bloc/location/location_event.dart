@@ -1,7 +1,6 @@
 part of 'location_bloc.dart';
 
-abstract class LocationEvent {
-  const LocationEvent();
+@freezed
+class LocationEvent with _$LocationEvent {
+  const factory LocationEvent.getCurrentLocation() = _LocationEvent;
 }
-
-class GetCurrentLocation extends LocationEvent {}

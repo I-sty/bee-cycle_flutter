@@ -21,7 +21,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   void initState() {
     _weatherBloc = WeatherBloc(locationBloc: _locationBloc);
-    _locationBloc.add(GetCurrentLocation());
+    _locationBloc.add(const LocationEvent.getCurrentLocation());
     super.initState();
   }
 
@@ -41,23 +41,24 @@ class _WeatherWidgetState extends State<WeatherWidget> {
         width: MediaQuery.of(context).size.width * 0.9,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocListener<WeatherBloc, WeatherState>(
-            listener: (context, state) {
-              if (state is WeatherError) {
-                //SnackBar
-              }
-            },
-            child: BlocBuilder<WeatherBloc, WeatherState>(
-              builder: (context, state) {
-                if (state is WeatherInitial || state is WeatherLoading) {
+          child: BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+              return state.when(
+                weatherInitial: () {
                   return const WeatherLoadingWidget();
-                } else if (state is WeatherLoaded) {
-                  return WeatherCardContent(state.data);
-                } else {
+                },
+                weatherLoading: () {
+                  return const WeatherLoadingWidget();
+                },
+                weatherLoaded: (data) {
+                  return WeatherCardContent(data);
+                },
+                weatherError: () {
+                  //TODO show a snackbar
                   return const SizedBox();
-                }
-              },
-            ),
+                },
+              );
+            },
           ),
         ),
       ),

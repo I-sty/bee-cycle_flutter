@@ -1,5 +1,6 @@
 import 'package:bee_cycle_flutter/common/widgets/loading.dart';
 import 'package:bee_cycle_flutter/features/bicycle_selector_widget/bloc/vehicles_bloc.dart';
+import 'package:bee_cycle_flutter/features/bicycle_selector_widget/model/vehicle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class _BicycleSelectorWidgetState extends State<BicycleSelectorWidget> {
   @override
   void initState() {
     _pageController = PageController(initialPage: 0);
-    _vehicleBloc.add(GetVehicleList());
+    _vehicleBloc.add(const VehicleEvent.getVehicleList());
     super.initState();
   }
 
@@ -35,37 +36,36 @@ class _BicycleSelectorWidgetState extends State<BicycleSelectorWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => _vehicleBloc,
-      child: BlocListener<VehiclesBloc, VehiclesState>(
-        listener: (context, state) {
-          if (state is VehiclesError) {
-            //TODO snackbar
-          }
-        },
-        child: BlocBuilder<VehiclesBloc, VehiclesState>(
-          builder: (context, state) {
-            if (state is VehiclesInitial || state is VehiclesLoading) {
+      child: BlocBuilder<VehiclesBloc, VehiclesState>(
+        builder: (context, state) {
+          return state.when(
+            vehiclesInitial: () {
               return const LoadingIndicator(height: 220);
-            }
-            if (state is VehiclesLoaded) {
-              return _buildList(state);
-            } else {
+            },
+            vehiclesLoading: () {
+              return const LoadingIndicator(height: 220);
+            },
+            vehiclesLoaded: (vehicles) {
+              return _buildList(vehicles);
+            },
+            vehiclesError: () {
               return const SizedBox();
-            }
-          },
-        ),
+            },
+          );
+        },
       ),
     );
   }
 
-  Widget _buildList(VehiclesLoaded state) {
-    final int _itemCount = state.vehicles.length;
+  Widget _buildList(List<Vehicle> vehicles) {
+    final int itemCount = vehicles.length;
     return Column(
       children: [
         SizedBox(
           height: 250,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: _itemCount,
+            itemCount: itemCount,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
@@ -76,7 +76,7 @@ class _BicycleSelectorWidgetState extends State<BicycleSelectorWidget> {
             },
             itemBuilder: (_, pageIndex) {
               return BicycleCardBuilder(
-                vehicle: state.vehicles[pageIndex],
+                vehicle: vehicles[pageIndex],
               );
             },
           ),
@@ -89,7 +89,7 @@ class _BicycleSelectorWidgetState extends State<BicycleSelectorWidget> {
               physics: const BouncingScrollPhysics(),
               separatorBuilder: (context, index) => const SizedBox(width: 5),
               scrollDirection: Axis.horizontal,
-              itemCount: _itemCount,
+              itemCount: itemCount,
               itemBuilder: (context, position) {
                 return GestureDetector(
                   onTap: () {
@@ -99,7 +99,8 @@ class _BicycleSelectorWidgetState extends State<BicycleSelectorWidget> {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 100),
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: selectedIndex == position ? Colors.green : Colors.grey.withOpacity(0.7)),
+                        shape: BoxShape.circle,
+                        color: selectedIndex == position ? Colors.green : Colors.grey.withOpacity(0.7)),
                     margin: const EdgeInsets.all(3),
                     width: 12,
                     height: 12,

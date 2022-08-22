@@ -48,14 +48,14 @@ class TeamCardWidget extends StatelessWidget {
       const SizedBox(height: 15),
       ElevatedButton(
         onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.only(left: 16.0, top: 12.0, right: 16.0, bottom: 12.0),
-          child: Text("Ride"),
-        ),
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         )),
+        child: const Padding(
+          padding: EdgeInsets.only(left: 16.0, top: 12.0, right: 16.0, bottom: 12.0),
+          child: Text("Ride"),
+        ),
       )
     ]);
   }

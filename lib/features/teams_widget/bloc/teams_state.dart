@@ -1,30 +1,16 @@
 part of 'teams_bloc.dart';
 
-abstract class TeamsState extends Equatable {
-  const TeamsState();
+@freezed
+class TeamsState with _$TeamsState {
+  const factory TeamsState.teamsInitial() = _TeamsInitial;
 
-  @override
-  List<Object> get props => [];
-}
+  const factory TeamsState.teamsLoading() = _TeamsLoading;
 
-class TeamsInitial extends TeamsState {}
+  const factory TeamsState.teamsLoaded({
+    required List<TeamModel> teamModel,
+  }) = _TeamsLoaded;
 
-class TeamsLoading extends TeamsState {}
-
-class TeamsLoaded extends TeamsState {
-  final List<TeamModel> teamModel;
-
-  const TeamsLoaded(this.teamModel);
-
-  @override
-  List<Object> get props => [teamModel];
-}
-
-class TeamsError extends TeamsState {
-  final String message;
-
-  const TeamsError(this.message);
-
-  @override
-  List<Object> get props => [message];
+  const factory TeamsState.teamsError({
+    required String message,
+  }) = _TeamsError;
 }

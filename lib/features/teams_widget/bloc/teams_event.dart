@@ -1,10 +1,6 @@
 part of 'teams_bloc.dart';
 
-abstract class TeamsEvent extends Equatable {
-  const TeamsEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class TeamsEvent with _$TeamsEvent {
+  const factory TeamsEvent.getTeamList() = _GetTeamList;
 }
-
-class GetTeamList extends TeamsEvent {}

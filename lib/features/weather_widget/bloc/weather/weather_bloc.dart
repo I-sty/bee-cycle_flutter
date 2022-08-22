@@ -2,9 +2,11 @@ import 'package:bee_cycle_flutter/features/weather_widget/bloc/location/location
 import 'package:bee_cycle_flutter/features/weather_widget/model/weather_data.dart';
 import 'package:bee_cycle_flutter/features/weather_widget/repository/weather_repository.dart';
 import 'package:bee_cycle_flutter/features/weather_widget/repository/weather_repository_impl.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'weather_bloc.freezed.dart';
 
 part 'weather_event.dart';
 
@@ -14,17 +16,24 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final IWeatherRepository _repository = WeatherRepositoryImpl(httpClient: Dio());
   final LocationBloc locationBloc;
 
-  WeatherBloc({required this.locationBloc}) : super(WeatherInitial()) {
+  WeatherBloc({required this.locationBloc}) : super(const WeatherState.weatherInitial()) {
     locationBloc.stream.listen((state) {
-      if (state is LocationLoaded) {
-        add(GetWeather(latitude: state.position.latitude, longitude: state.position.longitude));
-      }
+      state.when(
+        initial: () {},
+        loading: () {},
+        loaded: (position) {
+          add(WeatherEvent.getWeather(latitude: position.latitude, longitude: position.longitude));
+        },
+        error: (message) {},
+      );
     });
 
-    on<GetWeather>((event, emit) async {
-      emit(WeatherLoading());
-      final data = await _repository.getWeather(event.latitude, event.longitude);
-      emit(WeatherLoaded(data));
+    on<WeatherEvent>((event, emit) async {
+      await event.when(getWeather: (latitude, longitude) async {
+        emit(const WeatherState.weatherLoading());
+        final data = await _repository.getWeather(latitude, longitude);
+        emit(WeatherState.weatherLoaded(data: data));
+      });
     });
   }
 }

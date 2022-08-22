@@ -55,28 +55,28 @@ class WeatherCardContent extends StatelessWidget {
   String _getWeatherAnimation(int? weatherCode) {
     var imagePath = "assets/lottie/weather/";
 
-    if (weatherCode == null) return imagePath + "unknown.json";
+    if (weatherCode == null) return "${imagePath}unknown.json";
 
     if (weatherCode / 100 == 2) {
-      return imagePath + "storm_weather.json";
+      return "${imagePath}storm_weather.json";
     } else if (weatherCode / 100 == 3) {
-      return imagePath + "rainy_weather.json";
+      return "${imagePath}rainy_weather.json";
     } else if (weatherCode / 100 == 5) {
-      return imagePath + "rainy_weather.json";
+      return "${imagePath}rainy_weather.json";
     } else if (weatherCode / 100 == 6) {
-      return imagePath + "snow_weather.json";
+      return "${imagePath}snow_weather.json";
     } else if (weatherCode / 100 == 7) {
-      return imagePath + "unknown.json";
+      return "${imagePath}unknown.json";
     } else if (weatherCode == 800) {
-      return imagePath + "clear_day.json";
+      return "${imagePath}clear_day.json";
     } else if (weatherCode == 801) {
-      return imagePath + "few_clouds.json";
+      return "${imagePath}few_clouds.json";
     } else if (weatherCode == 803) {
-      return imagePath + "broken_clouds.json";
+      return "${imagePath}broken_clouds.json";
     } else if (weatherCode / 100 == 8) {
-      return imagePath + "cloudy_weather.json";
+      return "${imagePath}cloudy_weather.json";
     } else {
-      return imagePath + "unknown.json";
+      return "${imagePath}unknown.json";
     }
   }
 }

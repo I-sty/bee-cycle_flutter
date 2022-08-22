@@ -1,20 +1,14 @@
 part of 'vehicles_bloc.dart';
 
-abstract class VehiclesState extends Equatable {
-  const VehiclesState();
+@freezed
+class VehiclesState with _$VehiclesState {
+  const factory VehiclesState.vehiclesInitial() = _VehiclesInitial;
 
-  @override
-  List<Object> get props => [];
+  const factory VehiclesState.vehiclesLoading() = _VehiclesLoading;
+
+  const factory VehiclesState.vehiclesLoaded({
+    required List<Vehicle> vehicles,
+  }) = _VehiclesLoaded;
+
+  const factory VehiclesState.vehiclesError() = _VehiclesError;
 }
-
-class VehiclesInitial extends VehiclesState {}
-
-class VehiclesLoading extends VehiclesState {}
-
-class VehiclesLoaded extends VehiclesState {
-  final List<Vehicle> vehicles;
-
-  const VehiclesLoaded(this.vehicles);
-}
-
-class VehiclesError extends VehiclesState {}

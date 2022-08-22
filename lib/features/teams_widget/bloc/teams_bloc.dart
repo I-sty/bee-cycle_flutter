@@ -1,22 +1,25 @@
 import 'package:bee_cycle_flutter/features/teams_widget/repository/team_repository.dart';
 import 'package:bee_cycle_flutter/features/teams_widget/repository/team_repository_impl.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../model/team_model.dart';
+
+part 'teams_bloc.freezed.dart';
 
 part 'teams_event.dart';
 part 'teams_state.dart';
 
 class TeamsBloc extends Bloc<TeamsEvent, TeamsState> {
-  TeamsBloc() : super(TeamsInitial()) {
+  TeamsBloc() : super(const TeamsState.teamsInitial()) {
+    final ITeamRepository apiRepository = TeamRepositoryImpl();
 
-    final ITeamRepository _apiRepository = TeamRepositoryImpl();
-
-    on<GetTeamList>((event, emit) async {
-      emit(TeamsLoading());
-      final teams = await _apiRepository.getTeams();
-      emit(TeamsLoaded(teams));
+    on<TeamsEvent>((event, emit) async {
+      await event.when(getTeamList: () async {
+        emit(const TeamsState.teamsLoading());
+        final teams = await apiRepository.getTeams();
+        emit(TeamsState.teamsLoaded(teamModel: teams));
+      });
     });
   }
 }

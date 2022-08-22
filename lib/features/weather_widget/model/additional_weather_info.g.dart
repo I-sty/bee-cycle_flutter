@@ -6,21 +6,21 @@ part of 'additional_weather_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AdditionalWeatherInfo _$AdditionalWeatherInfoFromJson(
+_$_AdditionalWeatherInfo _$$_AdditionalWeatherInfoFromJson(
         Map<String, dynamic> json) =>
-    AdditionalWeatherInfo(
-      temperature: (json['temp'] as num?)?.toDouble(),
-      feelsLike: (json['feels_like'] as num?)?.toDouble(),
-      tempMin: (json['temp_min'] as num?)?.toDouble(),
-      tempMax: (json['temp_max'] as num?)?.toDouble(),
-      pressure: json['pressure'] as int?,
-      humidity: json['humidity'] as int?,
-      seaLevel: json['sea_level'] as int?,
-      groundLevel: json['grnd_level'] as int?,
+    _$_AdditionalWeatherInfo(
+      (json['temp'] as num?)?.toDouble(),
+      (json['feels_like'] as num?)?.toDouble(),
+      (json['temp_min'] as num?)?.toDouble(),
+      (json['temp_max'] as num?)?.toDouble(),
+      (json['pressure'] as num?)?.toDouble(),
+      json['humidity'] as int?,
+      json['sea_level'] as int?,
+      json['grnd_level'] as int?,
     );
 
-Map<String, dynamic> _$AdditionalWeatherInfoToJson(
-        AdditionalWeatherInfo instance) =>
+Map<String, dynamic> _$$_AdditionalWeatherInfoToJson(
+        _$_AdditionalWeatherInfo instance) =>
     <String, dynamic>{
       'temp': instance.temperature,
       'feels_like': instance.feelsLike,
