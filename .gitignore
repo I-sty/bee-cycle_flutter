@@ -124,6 +124,3 @@ app.*.symbols
 
 # Custom
 /.fvm/
-
-**ios/**/Debug.xcconfig
-Release.xcconfig
