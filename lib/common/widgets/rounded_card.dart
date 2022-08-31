@@ -4,8 +4,15 @@ class RoundedCard extends StatelessWidget {
   final Widget child;
   final double? width;
   final double? height;
+  final BorderRadius borderRadius;
 
-  const RoundedCard({Key? key, required this.child, this.width, this.height}) : super(key: key);
+  const RoundedCard({
+    Key? key,
+    required this.child,
+    this.width,
+    this.height,
+    this.borderRadius = const BorderRadius.all(Radius.circular(16)),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class RoundedCard extends StatelessWidget {
       width: width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: borderRadius,
         color: Colors.white,
         boxShadow: [
           BoxShadow(

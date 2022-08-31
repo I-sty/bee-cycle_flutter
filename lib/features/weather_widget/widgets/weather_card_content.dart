@@ -26,7 +26,7 @@ class WeatherCardContent extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 "${data.shortDescription}",
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
+                style: const TextStyle(fontSize: 13, color: Colors.black87),
               ),
               const SizedBox(height: 5),
               Text(
