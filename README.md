@@ -1,6 +1,6 @@
 # BeeCycle in Flutter
 
-The original idea was developed in a hackathlon in Kotlin for Android, see the original project: https://github.com/helod91/bee-cycle
+The original idea was developed in a hackathon in Kotlin for Android, see the original project: https://github.com/helod91/bee-cycle
 
 The goal of my project is to move native android code to Flutter.
 

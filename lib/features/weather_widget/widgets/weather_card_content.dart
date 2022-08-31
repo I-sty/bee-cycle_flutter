@@ -24,8 +24,11 @@ class WeatherCardContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              Text("${data.shortDescription}"),
-              const SizedBox(height: 13),
+              Text(
+                "${data.shortDescription}",
+                style: const TextStyle(fontSize: 13, color: Colors.grey),
+              ),
+              const SizedBox(height: 5),
               Text(
                 "Humidity ${data.humidity}%",
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
