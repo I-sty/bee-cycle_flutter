@@ -1,4 +1,6 @@
+import 'package:bee_cycle_flutter/common/widgets/pro_version_card.dart';
 import 'package:bee_cycle_flutter/common/widgets/rounded_card.dart';
+import 'package:bee_cycle_flutter/features/profile_page/widget/weather_preferences.dart';
 import 'package:bee_cycle_flutter/features/welcome_widget/welcome_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,41 @@ class ProfileScreen extends StatelessWidget {
                       width: 32,
                     ),
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ProVersionCard(
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "BeeCycle PRO",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              "10RON/month or 100RON/year",
+                              style: TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const WeatherPreferences()
                 ],
               ),
             ),

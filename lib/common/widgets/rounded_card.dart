@@ -5,6 +5,7 @@ class RoundedCard extends StatelessWidget {
   final double? width;
   final double? height;
   final BorderRadius borderRadius;
+  final bool isSelected;
 
   const RoundedCard({
     Key? key,
@@ -12,6 +13,7 @@ class RoundedCard extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius = const BorderRadius.all(Radius.circular(16)),
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,12 @@ class RoundedCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: borderRadius,
+        border: isSelected
+            ? Border.all(
+                color: Colors.green,
+                width: 4,
+              )
+            : null,
         color: Colors.white,
         boxShadow: [
           BoxShadow(

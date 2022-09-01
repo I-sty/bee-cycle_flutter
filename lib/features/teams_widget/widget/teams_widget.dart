@@ -1,3 +1,4 @@
+import 'package:bee_cycle_flutter/common/widgets/pro_version_card.dart';
 import 'package:bee_cycle_flutter/features/teams_widget/bloc/teams_bloc.dart';
 import 'package:bee_cycle_flutter/features/teams_widget/model/team_model.dart';
 import 'package:flutter/material.dart';
@@ -44,22 +45,15 @@ class _TeamsWidgetState extends State<TeamsWidget> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(width: 20),
-                Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF6452F0),
-                            Color(0xFF3700B3),
-                          ],
-                        )),
-                    child: const Padding(
-                      padding: EdgeInsets.only(bottom: 2, top: 2, right: 16.0, left: 16.0),
-                      child: Text(
-                        "PRO",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )),
+                const ProVersionCard(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 2, top: 2, right: 16.0, left: 16.0),
+                    child: Text(
+                      "PRO",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 16),
